@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[BASE] &mdash; [ROOT]</title>
+
+    <!-- https://github.com/tonsky/FiraCode -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css"
+    />
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+      :root {
+        --text-primary: #fff;
+        --text-secondary: #aaa;
+        --background: #000;
+        --sans: 'Fira Code', monospace;
+        --mono: 'Fira Code', monospace;
+        --stylistic-sets: 'zero', 'onum', 'cv01', 'cv02', 'cv06', 'ss01', 'cv14',
+          'ss04', 'cv18', 'ss07';
+      }
+
+      body {
+        margin: 0 auto;
+        max-width: 120ch;
+        line-height: 1.6;
+        word-break: break-word;
+        /* Fira Code seems to render larger than most fonts */
+        font-size: 0.875em;
+        font-family: var(--sans);
+        font-feature-settings: var(--stylistic-sets);
+        background: var(--background);
+        color: var(--text-primary);
+      }
+
+      /* ensure header and footer span the whole width on narrow pages */
+      body > table {
+        table-layout: fixed;
+        width: 100%;
+      }
+
+      a {
+        color: var(--text-secondary);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
+
+      a:hover {
+        color: var(--text-primary);
+      }
+
+      pre,
+      code {
+        white-space: pre-wrap;
+        font-family: var(--mono);
+        color: var(--text-secondary);
+      }
+
+      th,
+      td {
+        padding: 0.5em 1em;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      blockquote {
+        padding-left: 15px;
+        margin-left: 25px;
+        border-left: 2px solid var(--text-primary);
+      }
+
+      header,
+      footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      /* default */
+      .highlight :is(span) {
+        color: var(--text-primary);
+      }
+
+      /* keywords, built-ins */
+      .highlight :is(.k, .kc, .kd, .kp, .kr, .kt, .kn),
+      .highlight :is(.nb, .bp, .ow, .l) {
+        font-weight: bold;
+      }
+
+      /* comments */
+      .highlight :is(.c, .cm, .cp, .c1, .cs) {
+        color: var(--text-secondary);
+        font-style: italic;
+      }
+
+      /* operators */
+      .highlight :is(.o, .p, .se) {
+        color: var(--text-secondary);
+      }
+
+      /* numbers, strings, constants */
+      .highlight :is(.m, .mf, .mh, .mi, .mo, .il),
+      .highlight :is(.s, .sb, .sc, .sd, .s2, .sh, .si, .sx, .sr, .s1, .ss),
+      .highlight :is(.nc) {
+        font-style: italic;
+      }
+
+      @media print {
+        :root {
+          --text-primary: #000;
+          --text-secondary: #555;
+          --background: #fff;
+        }
+
+        body {
+          padding: 0;
+          font-size: 0.75em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- using a table so header and footer are repeated on every page when printing -->
+    <table>
+      <thead>
+        <td>
+          <header>
+            <a href="/">root</a>
+            <code>[BASE]</code>
+            <span>[ROOT]</span>
+          </header>
+          <hr />
+        </td>
+      </thead>
+      <tbody>
+        <td>
+          <main>[CONTENT]</main>
+        </td>
+      </tbody>
+      <tfoot>
+        <td>
+          <div></div>
+          <hr />
+          <footer>
+            <span>(c) [YEAR] Emilien Breton</span>
+            <code>[PATH]</code>
+          </footer>
+        </td>
+      </tfoot>
+    </table>
+  </body>
+</html>
