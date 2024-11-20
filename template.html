@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[BASE] &mdash; [ROOT]</title>
+    <title>[BASE]&nbsp;&mdash; [ROOT]</title>
 
     <!-- https://github.com/tonsky/FiraCode -->
     <link
@@ -20,20 +20,22 @@
         --text-primary: #fff;
         --text-secondary: #aaa;
         --background: #000;
-        --sans: 'Fira Code', monospace;
-        --mono: 'Fira Code', monospace;
+        --body: 'Fira Code', monospace;
+        --code: 'Fira Code', monospace;
         --stylistic-sets: 'zero', 'onum', 'cv01', 'cv02', 'cv06', 'ss01', 'cv14',
           'ss04', 'cv18', 'ss07';
       }
 
       body {
         margin: 0 auto;
-        max-width: 120ch;
-        line-height: 1.6;
+        max-width: 90ch;
+        line-height: 1.4;
         word-break: break-word;
+        /* prevent layout shift */
+        overflow-y: scroll;
         /* Fira Code seems to render larger than most fonts */
         font-size: 0.875em;
-        font-family: var(--sans);
+        font-family: var(--body);
         font-feature-settings: var(--stylistic-sets);
         background: var(--background);
         color: var(--text-primary);
@@ -58,7 +60,7 @@
       pre,
       code {
         white-space: pre-wrap;
-        font-family: var(--mono);
+        font-family: var(--code);
         color: var(--text-secondary);
       }
 
@@ -73,6 +75,7 @@
       }
 
       blockquote {
+        /* lined up with <ul> bullets */
         padding-left: 15px;
         margin-left: 25px;
         border-left: 2px solid var(--text-primary);
@@ -123,7 +126,7 @@
 
         body {
           padding: 0;
-          font-size: 0.75em;
+          font-size: 0.625em;
         }
       }
     </style>
@@ -151,7 +154,7 @@
         <td>
           <hr />
           <footer>
-            <span>(c) [YEAR] Emilien Breton</span>
+            <span>&copy;&nbsp;[YEAR] Emilien Breton</span>
             <code>[PATH]</code>
           </footer>
         </td>

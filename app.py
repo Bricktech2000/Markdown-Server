@@ -38,10 +38,11 @@ def preprocess_markdown(source):
 
   import re
   import random
-  if random.random() < 0.01:  # I wonder what this does
+  if random.random() < 0.001:  # I wonder what this does
     source = re.sub(r'(?<=[-_*\s]\w)\w*(?=\w)', lambda m: re.sub(r'(.)(.)', r'\2\1', m.group(0)), source)
   source = re.sub(r'\[\[([^\[\]]+?)\|([^\[\]]+?)\]\]', lambda m: f'[{m.group(2)}]({quote(href(m.group(1)))})', source)
   source = re.sub(r'\[\[([^\[\]]+?)\]\]', lambda m: f'[{label(m.group(1))}]({quote(href(m.group(1)))})', source)
+  source = re.sub(r'\n\n>', '\n<!-- -->\n>', source)  # try to prevent consecutive blockquotes getting merged
   return source
 
 
