@@ -3,7 +3,7 @@ import flask
 import time
 import os
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder='.')
 client = 'client/'
 
 
@@ -53,14 +53,11 @@ def markdown_to_html(source, path):
   extensions = [f'pymdownx.{ext}' for ext in pymdownx] + ['sane_lists', 'toc']  # `toc` adds `id`s to headers
   configs = {'pymdownx.arithmatex': {'generic': True}, 'toc': {'separator': ' '}}
 
-  with open('template.html', 'r') as f:
-    template = f.read()
-
   year = time.strftime('%Y')
   root = os.path.dirname(path).split('/')[0] or '(root)'
   base = os.path.basename(path).removesuffix('.md') or '(index)'
   content = markdown(source, extensions=extensions, extension_configs=configs, tab_length=2)
-  return template.replace('[YEAR]', year).replace('[ROOT]', root).replace('[BASE]', base).replace('[PATH]', path).replace('[CONTENT]', content)
+  return flask.render_template('template.html', year=year, root=root, base=base, path=path, content=content)
 
 
 @app.route('/', defaults={'path': 'index.md'})

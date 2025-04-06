@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[BASE]&nbsp;&mdash; [ROOT]</title>
+    <title>{{ base }}&nbsp;&mdash; {{ root }}</title>
 
     <!-- https://github.com/tonsky/FiraCode -->
     <link
@@ -12,7 +12,6 @@
       href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css"
     />
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
     <style>
@@ -81,6 +80,16 @@
         border-left: 2px solid var(--text-primary);
       }
 
+      li:has(input[type='checkbox']) {
+        list-style-type: none;
+      }
+
+      li input[type='checkbox'] {
+        /* lined up with <ul> bullets */
+        margin: 0 0 0 -20px;
+        vertical-align: middle;
+      }
+
       header,
       footer {
         display: flex;
@@ -139,23 +148,23 @@
         <td>
           <header>
             <a href="/">root</a>
-            <code>[BASE]</code>
-            <span>[ROOT]</span>
+            <code>{{ base }}</code>
+            <span>{{ root }}</span>
           </header>
           <hr />
         </td>
       </thead>
       <tbody>
         <td>
-          <main>[CONTENT]</main>
+          <main>{{ content|safe }}</main>
         </td>
       </tbody>
       <tfoot>
         <td>
           <hr />
           <footer>
-            <span>&copy;&nbsp;[YEAR] Emilien Breton</span>
-            <code>[PATH]</code>
+            <span>&copy;&nbsp;{{ year }} Emilien Breton</span>
+            <code>{{ path }}</code>
           </footer>
         </td>
       </tfoot>
