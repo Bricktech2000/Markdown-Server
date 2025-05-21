@@ -3,6 +3,21 @@ import flask
 import time
 import os
 
+import mimetypes
+for type_map in [
+    ('text/x-c', '.c'),
+    ('text/x-c', '.h'),
+    ('text/x-rust', '.rs'),
+    ('text/x-haskell', '.hs'),
+    ('text/x-vim', '.vim'),
+    ('text/x-c++', '.cpp'),
+    ('text/x-sh', '.sh'),
+    ('text/x-asm', '.s'),
+    ('text/x-asm', '.asm'),
+    ('text/x-forth', '.f'),
+]:
+  mimetypes.add_type(*type_map)
+
 app = flask.Flask(__name__, template_folder='.')
 client = 'client/'
 
@@ -67,16 +82,19 @@ def catch_all(path):
   whitelist = open('whitelist.txt', 'r').read().splitlines()
   if not any(fnmatch(path, pattern) for pattern in whitelist):
     return flask.abort(403)
+
   from contextlib import suppress
   if path.endswith('.md'):
     with suppress(FileNotFoundError):
       with open(os.path.join(client, path), 'r') as f:
         return markdown_to_html(preprocess_markdown(f.read()), path)
+
   if path.endswith('/'):
     with suppress(StopIteration):
       (_, dirs, files) = next(os.walk(os.path.join(client, path)))
       items = [f'- [{d}/]({d}/)' for d in dirs] + [f'- [{f}]({f})' for f in files]
       return markdown_to_html(preprocess_markdown('# Index\n' + '\n'.join(items)), path)
+
   return flask.send_from_directory(client, path)
 
 
