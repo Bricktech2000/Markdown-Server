@@ -15,6 +15,8 @@ for type_map in [
     ('text/x-asm', '.s'),
     ('text/x-asm', '.asm'),
     ('text/x-forth', '.f'),
+    ('text/x-bnf', '.bnf'),
+    ('text/x-go', '.go'),
 ]:
   mimetypes.add_type(*type_map)
 
