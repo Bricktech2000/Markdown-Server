@@ -102,28 +102,41 @@
         color: var(--text-primary);
       }
 
-      /* keywords, built-ins */
-      .highlight :is(.k, .kc, .kd, .kp, .kr, .kt, .kn),
-      .highlight :is(.nb, .bp, .ow, .l) {
+      /* keywords, built-ins, headings */
+      .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt),
+      .highlight :is(.nb, .bp, .ow, .l),
+      .highlight :is(.gh, .gu) {
         font-weight: bold;
       }
 
       /* comments */
-      .highlight :is(.c, .cm, .cp, .c1, .cs) {
+      .highlight :is(.c, .cm, .c1, .cs) {
         color: var(--text-secondary);
         font-style: italic;
       }
 
-      /* operators */
-      .highlight :is(.o, .p, .se) {
+      /* operators, escapes */
+      .highlight :is(.o, .p),
+      .highlight :is(.se) {
         color: var(--text-secondary);
       }
 
-      /* numbers, strings, constants */
-      .highlight :is(.m, .mf, .mh, .mi, .mo, .il),
+      /* numbers, strings, emphasis */
+      .highlight :is(.m, .mb, .mf, .mh, .mi, .mo, .il),
       .highlight :is(.s, .sb, .sc, .sd, .s2, .sh, .si, .sx, .sr, .s1, .ss),
-      .highlight :is(.nc) {
+      .highlight :is(.ge, .gs) {
         font-style: italic;
+      }
+
+      /* deleted */
+      .highlight :is(.gd) {
+        text-decoration: line-through;
+      }
+
+      /* inserted */
+      .highlight :is(.gi) {
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
       }
 
       @media print {
