@@ -17,8 +17,7 @@
 
     <style>
       :root {
-        --text-primary: #fff;
-        --text-secondary: #aaa;
+        --foreground: #fff;
         --background: #000;
         --body: 'Fira Code', monospace;
         --code: 'Fira Code', monospace;
@@ -37,7 +36,7 @@
         font-family: var(--body);
         font-feature-settings: var(--stylistic-sets);
         background: var(--background);
-        color: var(--text-primary);
+        color: var(--foreground);
       }
 
       /* ensure header and footer span the whole width on narrow pages */
@@ -47,20 +46,22 @@
       }
 
       a {
-        color: var(--text-secondary);
+        color: inherit;
         text-decoration: underline;
         text-underline-offset: 0.2em;
       }
 
-      a:hover {
-        color: var(--text-primary);
-      }
-
-      pre,
-      code {
+      code:not(pre code) {
         white-space: pre-wrap;
         font-family: var(--code);
-        color: var(--text-secondary);
+        padding: 0 0.5ch;
+      }
+
+      pre code {
+        white-space: pre;
+        display: block;
+        overflow-x: auto;
+        font-family: var(--code);
       }
 
       th,
@@ -77,7 +78,7 @@
         /* lined up with <ul> bullets */
         padding-left: 15px;
         margin-left: 25px;
-        border-left: 2px solid var(--text-primary);
+        border-left: 2px solid var(--foreground);
       }
 
       li:has(input[type='checkbox']) {
@@ -97,28 +98,23 @@
         justify-content: space-between;
       }
 
-      /* default */
-      .highlight :is(span) {
-        color: var(--text-primary);
-      }
-
       /* keywords, built-ins, headings */
       .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt),
       .highlight :is(.nb, .bp, .ow, .l),
       .highlight :is(.gh, .gu) {
-        font-weight: bold;
+        font-weight: bolder;
       }
 
       /* comments */
       .highlight :is(.c, .cm, .c1, .cs) {
-        color: var(--text-secondary);
+        font-weight: lighter;
         font-style: italic;
       }
 
       /* operators, escapes */
       .highlight :is(.o, .p),
       .highlight :is(.se) {
-        color: var(--text-secondary);
+        font-weight: lighter;
       }
 
       /* numbers, strings, emphasis */
@@ -141,8 +137,7 @@
 
       @media print {
         :root {
-          --text-primary: #000;
-          --text-secondary: #555;
+          --foreground: #000;
           --background: #fff;
         }
 
