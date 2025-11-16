@@ -65,16 +65,18 @@ def preprocess_markdown(source):
 
 def markdown_to_html(source, path):
   from markdown import markdown
+  import markupsafe
 
   pymdownx = ['extra', 'arithmatex', 'highlight', 'tasklist', 'tilde', 'saneheaders']
   extensions = [f'pymdownx.{ext}' for ext in pymdownx] + ['sane_lists', 'toc']  # `toc` adds `id`s to headers
   configs = {'pymdownx.arithmatex': {'generic': True}, 'toc': {'separator': ' '}}
 
   year = time.strftime('%Y')
-  root = os.path.dirname(path).split('/')[0] or '(root)'
-  base = os.path.basename(path).removesuffix('.md') or '(index)'
   content = markdown(source, extensions=extensions, extension_configs=configs, tab_length=2)
-  return flask.render_template('template.html', year=year, root=root, base=base, path=path, content=content)
+  parts = f'(root)/{os.path.dirname(path)}'.rstrip('/').split('/')
+  breadcrumb = ''.join(f'<a href="./{"../" * -n}">{markupsafe.escape(part)}</a>/' for n, part in
+                       enumerate(parts, -len(parts) + 1)) + f'{markupsafe.escape(os.path.basename(path))}'
+  return flask.render_template('template.html', year=year, content=content, breadcrumb=breadcrumb)
 
 
 @app.route('/', defaults={'path': 'index.md'})

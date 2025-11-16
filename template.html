@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
-    <title>{{ base }}&nbsp;&mdash; {{ root }}</title>
 
     <!-- https://github.com/tonsky/FiraCode -->
     <link
@@ -155,9 +154,8 @@
       <thead>
         <td>
           <header>
-            <a href="/">root</a>
-            <code>{{ base }}</code>
-            <span>{{ root }}</span>
+            <span>{{ breadcrumb|safe }}</span>
+            <span></span>
           </header>
           <hr />
         </td>
@@ -171,8 +169,9 @@
         <td>
           <hr />
           <footer>
-            <span>&copy;&nbsp;{{ year }} Emilien Breton</span>
-            <code>{{ path }}</code>
+            <span></span>
+            <span>&copy;&nbsp;{{ year|safe }} Emilien Breton</span>
+            <span></span>
           </footer>
         </td>
       </tfoot>
