@@ -9,6 +9,8 @@ for type_map in [
     ('text/x-c', '.h'),
     ('text/x-rust', '.rs'),
     ('text/x-haskell', '.hs'),
+    ('text/x-go', '.pnlc'),
+    ('text/x-go', '.bf'),
     ('text/x-vim', '.vim'),
     ('text/x-c++', '.cpp'),
     ('text/x-sh', '.sh'),
