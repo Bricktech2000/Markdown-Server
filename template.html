@@ -154,28 +154,34 @@
     <!-- using a table so header and footer are repeated on every page when printing -->
     <table>
       <thead>
-        <td>
-          <header>
-            <span>{{ breadcrumb|safe }}</span>
-            <span></span>
-          </header>
-          <hr />
-        </td>
+        <tr>
+          <td>
+            <header>
+              <span>{{ breadcrumb|safe }}</span>
+              <span></span>
+            </header>
+            <hr />
+          </td>
+        </tr>
       </thead>
       <tbody>
-        <td>
-          <main>{{ content|safe }}</main>
-        </td>
+        <tr>
+          <td>
+            <main>{{ content|safe }}</main>
+          </td>
+        </tr>
       </tbody>
       <tfoot>
-        <td>
-          <hr />
-          <footer>
-            <span></span>
-            <span>&copy;&nbsp;{{ year|safe }} Emilien Breton</span>
-            <span></span>
-          </footer>
-        </td>
+        <tr>
+          <td>
+            <hr />
+            <footer>
+              <span></span>
+              <span>&copy;&nbsp;{{ year|safe }} Emilien Breton</span>
+              <span></span>
+            </footer>
+          </td>
+        </tr>
       </tfoot>
     </table>
   </body>
