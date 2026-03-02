@@ -7,10 +7,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
 
     <!-- https://github.com/tonsky/FiraCode -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
@@ -140,11 +137,18 @@
         :root {
           --foreground: #000;
           --background: #fff;
+          /* white margins */
+          color-scheme: light;
         }
 
         body {
           padding: 0;
           font-size: 0.625em;
+        }
+
+        pre code {
+          white-space: pre-wrap;
+          overflow-x: visible;
         }
       }
     </style>
