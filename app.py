@@ -9,8 +9,8 @@ for type_map in [
     ('text/x-c', '.h'),
     ('text/x-rust', '.rs'),
     ('text/x-haskell', '.hs'),
-    ('text/x-go', '.pnlc'),
-    ('text/x-go', '.bf'),
+    ('text/x-pnlc', '.pnlc'),
+    ('text/x-bf', '.bf'),
     ('text/x-vim', '.vim'),
     ('text/x-c++', '.cpp'),
     ('text/x-sh', '.sh'),
@@ -19,6 +19,8 @@ for type_map in [
     ('text/x-forth', '.f'),
     ('text/x-bnf', '.bnf'),
     ('text/x-go', '.go'),
+    ('text/x-csv', '.csv'),
+    ('text/x-tsv', '.tsv'),
 ]:
   mimetypes.add_type(*type_map)
 

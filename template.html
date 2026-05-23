@@ -15,10 +15,7 @@
       :root {
         --foreground: #fff;
         --background: #000;
-        --body: 'Fira Code', monospace;
-        --code: 'Fira Code', monospace;
-        --stylistic-sets: 'cv06', 'zero', 'cv14', 'onum', 'ss04', 'ss07';
-        /* dark-mode scrollbar */
+        /* dark-mode scrollbars */
         color-scheme: dark;
       }
 
@@ -29,10 +26,10 @@
         word-break: break-word;
         /* prevent layout shift */
         overflow-y: scroll;
-        /* Fira Code seems to render larger than most fonts */
+        font-family: 'Fira Code', monospace;
+        /* Fira Code renders larger than other fonts */
         font-size: 0.875em;
-        font-family: var(--body);
-        font-feature-settings: var(--stylistic-sets);
+        font-feature-settings: 'cv06', 'zero', 'cv14', 'onum', 'ss04', 'ss07';
         background: var(--background);
         color: var(--foreground);
       }
@@ -43,23 +40,52 @@
         width: 100%;
       }
 
+      h1, h2, h3 {
+        font-size: 1em;
+        text-transform: uppercase;
+        margin-top: 2em;
+      }
+
+      h1 {
+        font-weight: bold;
+        letter-spacing: 0.25ch;
+      }
+
+      h2 {
+        font-weight: bold;
+      }
+
+      h3 {
+        font-weight: 500;
+      }
+
       a {
         color: inherit;
         text-decoration: underline;
         text-underline-offset: 0.2em;
       }
 
+      code {
+        font-family: 'Fira Code', monospace;
+        /* letter-spacing = (1em - font-size) / font-size * 1ch */
+        font-size: 0.8em;
+        letter-spacing: 0.25ch;
+        /* `letter-spacing` adds space *after* each character. fix that up. */
+        padding: 0 -0.125ch 0 0.125ch;
+        vertical-align: middle;
+        font-weight: 500;
+      }
+
       code:not(pre code) {
         white-space: pre-wrap;
-        font-family: var(--code);
-        padding: 0 0.5ch;
       }
 
       pre code {
         white-space: pre;
         display: block;
         overflow-x: auto;
-        font-family: var(--code);
+        /* lined up with <blockquote>s */
+        margin: 0 40px;
       }
 
       th,
@@ -92,7 +118,6 @@
       header,
       footer {
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
       }
 
@@ -100,19 +125,19 @@
       .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt),
       .highlight :is(.nb, .bp, .ow, .l),
       .highlight :is(.gh, .gu) {
-        font-weight: bolder;
+        font-weight: bold;
       }
 
       /* comments */
       .highlight :is(.c, .cm, .c1, .cs) {
-        font-weight: lighter;
+        font-weight: normal;
         font-style: italic;
       }
 
       /* operators, escapes */
       .highlight :is(.o, .p),
       .highlight :is(.se) {
-        font-weight: lighter;
+        font-weight: normal;
       }
 
       /* numbers, strings, emphasis */
