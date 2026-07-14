@@ -2,7 +2,6 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
 
@@ -23,13 +22,14 @@
         margin: 0 auto;
         max-width: 90ch;
         line-height: 1.4;
-        word-break: break-word;
+        overflow-wrap: break-word;
         /* prevent layout shift */
         overflow-y: scroll;
         font-family: 'Fira Code', monospace;
         /* Fira Code renders larger than other fonts */
         font-size: 0.875em;
-        font-feature-settings: 'cv02', 'cv06', 'zero', 'onum', 'ss04', 'ss07';
+        font-feature-settings: 'cv02', 'cv06', 'zero', 'ss04', 'ss07';
+        font-variant-numeric: oldstyle-nums;
         background: var(--background);
         color: var(--foreground);
       }
@@ -40,44 +40,21 @@
         width: 100%;
       }
 
-      h1, h2, h3 {
-        font-size: 1em;
-        text-transform: uppercase;
-        margin-top: 2em;
-      }
-
-      h1 {
-        font-weight: bold;
-        letter-spacing: 0.25ch;
-      }
-
-      h2 {
-        font-weight: bold;
-      }
-
-      h3 {
-        font-weight: 500;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: underline;
-        text-underline-offset: 0.2em;
+      /* AutoLiningFigures() custom extension */
+      i {
+        font-style: inherit;
+        font-variant-numeric: lining-nums;
       }
 
       code {
+        white-space: pre-wrap;
         font-family: 'Fira Code', monospace;
         /* letter-spacing = (1em - font-size) / font-size * 1ch */
         font-size: 0.8em;
         letter-spacing: 0.25ch;
-        /* `letter-spacing` adds space *after* each character. fix that up. */
-        padding: 0 -0.125ch 0 0.125ch;
         vertical-align: middle;
+        /* compensate for smaller font size */
         font-weight: 500;
-      }
-
-      code:not(pre code) {
-        white-space: pre-wrap;
       }
 
       pre code {
@@ -86,6 +63,57 @@
         overflow-x: auto;
         /* lined up with <blockquote>s */
         margin: 0 40px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-size: 1em;
+        text-transform: uppercase;
+        font-variant-numeric: lining-nums;
+        margin-top: 2em;
+      }
+
+      h1 {
+        font-weight: 600;
+        letter-spacing: 0.25ch;
+      }
+
+      h2 {
+        font-weight: 600;
+      }
+
+      h3 {
+        font-weight: 400;
+      }
+
+      h1 code {
+        /* compensate for smaller font size */
+        font-weight: 700;
+        /* (h1-letter-spacing + 1) * (code-letter-spacing + 1) - 1 */
+        letter-spacing: 0.5625ch;
+      }
+
+      h2 code {
+        /* compensate for smaller font size */
+        font-weight: 700;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
+
+      th,
+      strong {
+        font-weight: 600;
+      }
+
+      th code,
+      strong code {
+        /* compensate for smaller font size */
+        font-weight: 700;
       }
 
       th,
@@ -125,19 +153,19 @@
       .highlight :is(.k, .kc, .kd, .kn, .kp, .kr, .kt),
       .highlight :is(.nb, .bp, .ow, .l),
       .highlight :is(.gh, .gu) {
-        font-weight: bold;
+        font-weight: 700;
       }
 
       /* comments */
       .highlight :is(.c, .cm, .c1, .cs) {
-        font-weight: normal;
+        font-weight: 400;
         font-style: italic;
       }
 
       /* operators, escapes */
       .highlight :is(.o, .p),
       .highlight :is(.se) {
-        font-weight: normal;
+        font-weight: 400;
       }
 
       /* numbers, strings, emphasis */
@@ -187,7 +215,7 @@
           <td>
             <header>
               <span>{{ breadcrumb|safe }}</span>
-              <span></span>
+              <a href="/rss.xml">RSS</a>
             </header>
             <hr />
           </td>
@@ -206,7 +234,7 @@
             <hr />
             <footer>
               <span></span>
-              <span>&copy;&nbsp;{{ year|safe }} Emilien Breton</span>
+              <span>&copy;&nbsp;<i>{{ year|safe }}</i> Emilien Breton</span>
               <span></span>
             </footer>
           </td>

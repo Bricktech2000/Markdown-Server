@@ -33,21 +33,29 @@ def preprocess_markdown(source):
     from urllib.parse import quote
     return quote(string, safe='/#', *args, **kwargs)
 
+  # [[morphism]]                      ==>  morphism
+  # [[function#pure function]]        ==>  pure <function
+  # [[morphism#homomorphism]]         ==>  homo<morphism
+  # [[matrix#matrix multiplication]]  ==>  matrix> multiplication
+  # [[eigen#eigenvector]]             ==>  eigen>vector
+  # [[function#slope]]                ==>  function > slope
   def label(match):
-    # below would return label `pure < function` given wikilink `[[function#pure function]]`
-    # and would return label `function > slope` given wikilink `[[function#slope]]`
     match match.split('#', 1):
       case [filename]:
         return f'{filename}'
       case [filename, anchor] if anchor.endswith(filename):
-        return f'{anchor.removesuffix(filename)} < {filename}'
+        return f'{anchor.removesuffix(filename)}\u2039{filename}'
+      case [filename, anchor] if anchor.startswith(filename):
+        return f'{filename}\u203a{anchor.removeprefix(filename)}'
       case [filename, anchor]:
-        return f'{filename} > {anchor}'
+        return f'{filename}\xa0\u203a {anchor}'
       case _:
         assert False, 'unreachable'
 
+  # [[notes.pdf]]       ==>  notes.pdf
+  # [[function]]        ==>  function.md
+  # [[function#slope]]  ==>  function.md#slope
   def href(match):
-    # below would return href `function.md#slope` given wikilink `[[function#slope]]`
     extension = '.md' if '.' not in match else ''
     match match.split('#', 1):
       case [filename]:
@@ -68,17 +76,25 @@ def preprocess_markdown(source):
 
 
 def markdown_to_html(source, path):
+  from markdown.inlinepatterns import SimpleTagInlineProcessor
+  from markdown.extensions import Extension
+
+  class AutoLiningFigures(Extension):
+    def extendMarkdown(self, md):
+      md.inlinePatterns.register(SimpleTagInlineProcessor(  # priority 200 so it runs even inside code blocks
+          r"(((?<=[A-Z])([^\w\x02]?\d)+|(\d[^\w\x03]?)+(?=[A-Z])))", 'i'), 'auto_lining_figures', 200)
+
   from markdown import markdown
   import markupsafe
 
   pymdownx = ['extra', 'arithmatex', 'highlight', 'tasklist', 'tilde', 'saneheaders']
-  extensions = [f'pymdownx.{ext}' for ext in pymdownx] + ['sane_lists', 'toc']  # `toc` adds `id`s to headers
-  configs = {'pymdownx.arithmatex': {'generic': True}, 'toc': {'separator': ' '}}
+  extensions = [f'pymdownx.{ext}' for ext in pymdownx] + ['sane_lists', 'toc', AutoLiningFigures()]
+  configs = {'pymdownx.arithmatex': {'generic': True}, 'toc': {'separator': ' '}}  # `toc` adds `id`s to headings
 
   year = time.strftime('%Y')
   content = markdown(source, extensions=extensions, extension_configs=configs, tab_length=2)
   parts = f'(root)/{os.path.dirname(path)}'.rstrip('/').split('/')
-  breadcrumb = ''.join(f'<a href="./{"../" * -n}">{markupsafe.escape(part)}</a>/' for n, part in
+  breadcrumb = ''.join(f'<a href="./{"../" * -n}">{markupsafe.escape(part)}</a>/<wbr>' for n, part in
                        enumerate(parts, -len(parts) + 1)) + f'{markupsafe.escape(os.path.basename(path))}'
   return flask.render_template('template.html', year=year, content=content, breadcrumb=breadcrumb)
 
