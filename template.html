@@ -65,6 +65,11 @@
         margin: 0 40px;
       }
 
+      mjx-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
       h1,
       h2,
       h3 {
@@ -164,13 +169,12 @@
 
       /* operators, escapes */
       .highlight :is(.o, .p),
-      .highlight :is(.se) {
+      .highlight :is(.se, .si) {
         font-weight: 400;
       }
 
-      /* numbers, strings, emphasis */
-      .highlight :is(.m, .mb, .mf, .mh, .mi, .mo, .il),
-      .highlight :is(.s, .sb, .sc, .sd, .s2, .sh, .si, .sx, .sr, .s1, .ss),
+      /* strings, emphasis */
+      .highlight :is(.s, .sb, .sc, .sd, .s2, .sh, .sx, .sr, .s1, .ss),
       .highlight :is(.ge, .gs) {
         font-style: italic;
       }
@@ -203,6 +207,10 @@
           white-space: pre-wrap;
           overflow-x: visible;
         }
+
+        mjx-container {
+          overflow: visible;
+        }
       }
     </style>
   </head>
@@ -214,7 +222,7 @@
         <tr>
           <td>
             <header>
-              <span>{{ breadcrumb|safe }}</span>
+              <i>{{ breadcrumb|safe }}</i>
               <a href="/rss.xml">RSS</a>
             </header>
             <hr />
@@ -234,7 +242,7 @@
             <hr />
             <footer>
               <span></span>
-              <span>&copy;&nbsp;<i>{{ year|safe }}</i> Emilien Breton</span>
+              <i>&copy;&nbsp;{{ year|safe }} Emilien Breton</i>
               <span></span>
             </footer>
           </td>

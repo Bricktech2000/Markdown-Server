@@ -81,8 +81,9 @@ def markdown_to_html(source, path):
 
   class AutoLiningFigures(Extension):
     def extendMarkdown(self, md):
+      sep = r'(?![\x02\x03])[\W_]'  # Python-Markdown uses STX and ETX for placeholding. filter them out
       md.inlinePatterns.register(SimpleTagInlineProcessor(  # priority 200 so it runs even inside code blocks
-          r"(((?<=[A-Z])([^\w\x02]?\d)+|(\d[^\w\x03]?)+(?=[A-Z])))", 'i'), 'auto_lining_figures', 200)
+          rf'(((?<=[A-Z])({sep}?\d)+|(\d{sep}?)+(?=[A-Z])))', 'i'), 'auto_lining_figures', 200)
 
   from markdown import markdown
   import markupsafe
