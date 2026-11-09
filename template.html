@@ -63,6 +63,11 @@
         overflow-x: auto;
         /* lined up with <blockquote>s */
         margin: 0 40px;
+        /* letter-spacing = (1em - font-size) / font-size * 1ch */
+        /* line-height = 1em / font-size * body-line-height */
+        font-size: 0.875em;
+        letter-spacing: 0.143ch;
+        line-height: 1.6;
       }
 
       mjx-container {
@@ -186,8 +191,8 @@
 
       /* inserted */
       .highlight :is(.gi) {
-        text-decoration: underline;
-        text-underline-offset: 0.2em;
+        text-decoration: underline dashed;
+        text-underline-offset: 0.3em;
       }
 
       @media print {
